@@ -2,9 +2,10 @@ FROM ich777/debian-baseimage
 
 LABEL maintainer="admin@minenet.at"
 
-#RUN apt-get update && \
-#	apt-get -y install --no-install-recommends && \
-#	rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+	mkdir -p /usr/share/man/man1 && \
+	apt-get -y install --no-install-recommends default-jre-headless && \
+	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/nzbhydra2"
 ENV NZBHYDRA2_REL="latest"
