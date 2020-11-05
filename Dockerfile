@@ -7,7 +7,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/nzbhydra2"
-ENV SABNZBD_REL="latest"
+ENV NZBHYDRA2_REL="latest"
 ENV START_PARAMS=""
 ENV UMASK=0000
 ENV DATA_PERM=770
