@@ -4,7 +4,7 @@ LABEL maintainer="admin@minenet.at"
 
 RUN apt-get update && \
 	mkdir -p /usr/share/man/man1 && \
-	apt-get -y install --no-install-recommends default-jre-headless && \
+	apt-get -y install --no-install-recommends default-jre-headless unzip && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/nzbhydra2"
