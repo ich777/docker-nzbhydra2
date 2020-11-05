@@ -58,4 +58,4 @@ fi
 
 echo "---Starting NZBHydra2---"
 cd ${DATA_DIR}
-${DATA_DIR}/NZBHydra2/nzbhydra2 --datafolder ${DATA_DIR}/.config ${START_PARAMS}
+${DATA_DIR}/NZBHydra2/nzbhydra2 --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
