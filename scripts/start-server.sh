@@ -16,6 +16,10 @@ if [ -z $LAT_V ]; then
     fi
 fi
 
+if [ -f ${DATA_DIR}/NZBHydra2-v$LAT_V.zip ]; then
+    rm -rf ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
+fi
+
 echo "---Version Check---"
 if [ -z "$CUR_V" ]; then
     echo "---NZBHydra2 not found, downloading and installing v$LAT_V...---"
