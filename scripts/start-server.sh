@@ -54,6 +54,15 @@ elif [ "$CUR_V" != "$LAT_V" ]; then
 elif [ "$CUR_V" == "$LAT_V" ]; then
     echo "---NZBHydra2 v$CUR_V up-to-date---"
 fi
+if [ ! -f ${DATA_DIR}/NZBHydra2/nzbhydra2wrapper.py ]; then
+    cd ${DATA_DIR}/NZBHydra2
+    if wget -q -nc --show-progress --progress=bar:force:noscroll https://raw.githubusercontent.com/theotherp/nzbhydra2/master/other/wrapper/nzbhydra2wrapper.py ; then
+        echo "---Successfully downloaded NZBHydra2 Wrapper"
+    else
+        echo "---Something went wrong, can't download NZBHydra2 Wrapper, putting container into sleep mode!---"
+        sleep infinity
+    fi
+fi
 
 echo "---Preparing Server---"
 if [ ! -d ${DATA_DIR}/.config ]; then
@@ -62,4 +71,4 @@ fi
 
 echo "---Starting NZBHydra2---"
 cd ${DATA_DIR}
-${DATA_DIR}/NZBHydra2/nzbhydra2 --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
+/usr/bin/python ${DATA_DIR}/NZBHydra2/nzbhydra2wrapper.py --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
