@@ -34,13 +34,13 @@ if [ -z "$CUR_V" ]; then
         sleep infinity
     fi
     mkdir ${DATA_DIR}/NZBHydra2
-    unzip ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
+    unzip -o ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
     chmod +x ${DATA_DIR}/NZBHydra2/nzbhydra2
     touch ${DATA_DIR}/installed-$LAT_V
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
 elif [ "$CUR_V" != "$LAT_V" ]; then
     echo "---Version missmatch, installed v$CUR_V, downloading and installing latest v$LAT_V...---"
-    rm -R ${DATA_DIR}/NZBHydra2 ${DATA_DIR}/installed-$CUR_V
+    rm -rf ${DATA_DIR}/NZBHydra2 ${DATA_DIR}/installed-$CUR_V
     cd ${DATA_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/NZBHydra2-v$LAT_V.zip "https://github.com/theotherp/nzbhydra2/releases/download/v${LAT_V}/nzbhydra2-${LAT_V}-linux.zip" ; then
         echo "---Successfully downloaded NZBHydra2 v$LAT_V---"
@@ -49,7 +49,7 @@ elif [ "$CUR_V" != "$LAT_V" ]; then
         sleep infinity
     fi
     mkdir ${DATA_DIR}/NZBHydra2
-    unzip ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
+    unzip -o ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
     chmod +x ${DATA_DIR}/NZBHydra2/nzbhydra2
     touch ${DATA_DIR}/installed-$LAT_V
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
