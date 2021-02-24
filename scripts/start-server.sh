@@ -5,7 +5,7 @@ else
     echo "---Version manually set to: v$NZBHYDRA2_REL---"
     LAT_V="$NZBHYDRA2_REL"
 fi
-CUR_V="$(cat ${DATA_DIR}/NZBHydra2/changelog.md 2>/dev/null | grep "###" | head -1 | cut -d ' ' -f2 | cut -d 'v' -f2)"
+CUR_V="$(find ${DATA_DIR} -maxdepth 1 -name "installed-*" | cut -d '-' -f2)"
 
 if [ -z $LAT_V ]; then
     if [ -z $CUR_V ]; then
@@ -16,8 +16,8 @@ if [ -z $LAT_V ]; then
     fi
 fi
 
-if [ -f ${DATA_DIR}/NZBHydra2-v$LAT_V.zip ]; then
-    rm -rf ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
+if [ -f ${DATA_DIR}/NZBHydra2-v*.zip ]; then
+    rm -rf ${DATA_DIR}/NZBHydra2-v*.zip
 fi
 
 echo "---Version Check---"
@@ -36,10 +36,11 @@ if [ -z "$CUR_V" ]; then
     mkdir ${DATA_DIR}/NZBHydra2
     unzip ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
     chmod +x ${DATA_DIR}/NZBHydra2/nzbhydra2
+    touch ${DATA_DIR}/installed-$LAT_V
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
 elif [ "$CUR_V" != "$LAT_V" ]; then
     echo "---Version missmatch, installed v$CUR_V, downloading and installing latest v$LAT_V...---"
-    rm -R ${DATA_DIR}/NZBHydra2
+    rm -R ${DATA_DIR}/NZBHydra2 ${DATA_DIR}/installed-v$CUR_V
     cd ${DATA_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/NZBHydra2-v$LAT_V.zip "https://github.com/theotherp/nzbhydra2/releases/download/v${LAT_V}/nzbhydra2-${LAT_V}-linux.zip" ; then
         echo "---Successfully downloaded NZBHydra2 v$LAT_V---"
@@ -50,6 +51,7 @@ elif [ "$CUR_V" != "$LAT_V" ]; then
     mkdir ${DATA_DIR}/NZBHydra2
     unzip ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
     chmod +x ${DATA_DIR}/NZBHydra2/nzbhydra2
+    touch ${DATA_DIR}/installed-$LAT_V
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
 elif [ "$CUR_V" == "$LAT_V" ]; then
     echo "---NZBHydra2 v$CUR_V up-to-date---"
