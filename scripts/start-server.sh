@@ -34,7 +34,7 @@ if [ -z "$CUR_V" ]; then
         sleep infinity
     fi
     mkdir ${DATA_DIR}/NZBHydra2
-    unzip ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
+    unzip -o ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
     chmod +x ${DATA_DIR}/NZBHydra2/nzbhydra2
     touch ${DATA_DIR}/installed-$LAT_V
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
@@ -49,7 +49,7 @@ elif [ "$CUR_V" != "$LAT_V" ]; then
         sleep infinity
     fi
     mkdir ${DATA_DIR}/NZBHydra2
-    unzip ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
+    unzip -o ${DATA_DIR}/NZBHydra2-v$LAT_V.zip -d ${DATA_DIR}/NZBHydra2
     chmod +x ${DATA_DIR}/NZBHydra2/nzbhydra2
     touch ${DATA_DIR}/installed-$LAT_V
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
