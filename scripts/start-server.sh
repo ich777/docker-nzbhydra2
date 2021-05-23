@@ -62,6 +62,16 @@ if [ ! -d ${DATA_DIR}/.config ]; then
     mkdir -p ${DATA_DIR}/.config
 fi
 
+echo "+-------------------------------------------------------------"
+echo "|"
+echo "| This container for ARM is deprecated and is no"
+echo "| longer actively maintained or further developed!"
+echo "|"
+echo "|  Container will start in 60 seconds!"
+echo "|"
+echo "+-------------------------------------------------------------"
+sleep 60
+
 echo "---Starting NZBHydra2---"
 cd ${DATA_DIR}
 /usr/bin/python3 ${DATA_DIR}/NZBHydra2/nzbhydra2wrapperPy3.py --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
