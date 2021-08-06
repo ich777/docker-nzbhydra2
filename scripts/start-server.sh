@@ -40,7 +40,8 @@ if [ -z "$CUR_V" ]; then
     rm ${DATA_DIR}/NZBHydra2-v$LAT_V.zip
 elif [ "$CUR_V" != "$LAT_V" ]; then
     echo "---Version missmatch, installed v$CUR_V, downloading and installing latest v$LAT_V...---"
-    rm -rf ${DATA_DIR}/NZBHydra2 ${DATA_DIR}/installed-v$CUR_V
+    rm -rf ${DATA_DIR}/NZBHydra2
+    rm -rf ${DATA_DIR}/installed-*
     cd ${DATA_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/NZBHydra2-v$LAT_V.zip "https://github.com/theotherp/nzbhydra2/releases/download/v${LAT_V}/nzbhydra2-${LAT_V}-linux.zip" ; then
         echo "---Successfully downloaded NZBHydra2 v$LAT_V---"
