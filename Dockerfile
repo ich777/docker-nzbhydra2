@@ -5,7 +5,11 @@ LABEL org.opencontainers.image.source="https://github.com/ich777/docker-nzbhydra
 
 RUN apt-get update && \
 	mkdir -p /usr/share/man/man1 && \
-	apt-get -y install --no-install-recommends default-jre-headless unzip && \
+	apt-get -y install --no-install-recommends default-jre-headless unzip python3 python3-pip && \
+	APPRISE_V=$(wget -qO- https://api.github.com/repos/caronc/apprise/releases/latest | grep "tag_name" | cut -d '"' -f4 | tr -d v) && \
+	pip install apprise==${APPRISE_V} && \
+	apt-get -y remove python3-pip && \
+	apt-get -y autoremove && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/nzbhydra2"
