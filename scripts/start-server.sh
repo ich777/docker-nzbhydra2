@@ -13,6 +13,7 @@ if [ -z $LAT_V ]; then
         sleep infinity
     else
         echo "---Can't get latest version of NZBHydra2, falling back to v$CUR_V---"
+        LAT_V=$CUR_V
     fi
 fi
 
@@ -59,25 +60,26 @@ elif [ "$CUR_V" == "$LAT_V" ]; then
 fi
 
 echo "---Preparing Server---"
-#echo "---Checking if Generic libraries are installed---"
-#if [ ! -d ${DATA_DIR}/NZBHydra2/lib ]; then
-#    echo "---Generic libraries not found, please wait, installing...---"
-#    cd ${DATA_DIR}
-#    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip "https://github.com/theotherp/nzbhydra2/releases/download/v${LAT_V}/nzbhydra2-${LAT_V}-generic.zip" ; then
-#        echo "---Successfully downloaded NZBHydra2 Generic libraries v$LAT_V---"
-#    else
-#        echo "---Something went wrong, can't download NZBHydra2 Generic libraries v$LAT_V, putting container into sleep mode!---"
-#        sleep infinity
-#    fi
-#    unzip -o ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip -d ${DATA_DIR}/NZBHydra2
-#    rm -rf ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip
-#else
-#    echo "---Generic libraries found!---"
-#fi
+if [ "${LAT_V%%.*}" -ge "5" ]; then
+    echo "---Checking if Generic libraries are installed---"
+    if [ ! -d ${DATA_DIR}/NZBHydra2/lib ]; then
+        echo "---Generic libraries not found, please wait, installing...---"
+        cd ${DATA_DIR}
+        if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip "https://github.com/theotherp/nzbhydra2/releases/download/v${LAT_V}/nzbhydra2-${LAT_V}-generic.zip" ; then
+            echo "---Successfully downloaded NZBHydra2 Generic libraries v$LAT_V---"
+        else
+            echo "---Something went wrong, can't download NZBHydra2 Generic libraries v$LAT_V, putting container into sleep mode!---"
+            sleep infinity
+        fi
+        unzip -o ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip -d ${DATA_DIR}/NZBHydra2
+        rm -rf ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip
+    else
+        echo "---Generic libraries found!---"
+    fi
+fi
 if [ ! -d ${DATA_DIR}/.config ]; then
     mkdir -p ${DATA_DIR}/.config
 fi
-
 
 echo "---Starting NZBHydra2---"
 cd ${DATA_DIR}/NZBHydra2
