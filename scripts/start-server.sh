@@ -61,7 +61,7 @@ fi
 echo "---Preparing Server---"
 echo "---Checking if Generic libraries are installed---"
 if [ ! -d ${DATA_DIR}/NZBHydra2/lib ]; then
-    echo "---Checking if Generic libraries not found, please wait...---"
+    echo "---Generic libraries not found, please wait, installing...---"
     cd ${DATA_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${DATA_DIR}/NZBHydra2-v$LAT_V-generic.zip "https://github.com/theotherp/nzbhydra2/releases/download/v${LAT_V}/nzbhydra2-${LAT_V}-generic.zip" ; then
         echo "---Successfully downloaded NZBHydra2 Generic libraries v$LAT_V---"
