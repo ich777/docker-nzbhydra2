@@ -81,4 +81,8 @@ fi
 
 echo "---Starting NZBHydra2---"
 cd ${DATA_DIR}/NZBHydra2
-${DATA_DIR}/NZBHydra2/nzbhydra2 --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
+if [ "${LAT_V%%.*}" -ge "5" ]; then
+    /usr/bin/python3 ${DATA_DIR}/NZBHydra2/nzbhydra2wrapperPy3.py --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
+else
+    ${DATA_DIR}/NZBHydra2/nzbhydra2 --datafolder ${DATA_DIR}/.config --nobrowser --nocolors ${START_PARAMS}
+fi
