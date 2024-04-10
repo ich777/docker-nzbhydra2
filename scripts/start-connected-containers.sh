@@ -10,5 +10,5 @@ if [ "${EXIT_STATUS}" == 1 ]; then
 else
   echo "---Connection to connected container: ${CONNECTED_CONTAINERS} lost, restarting in 5 seconds...---"
   sleep 5
-  kill -SIGTERM $(pidof core)
+  kill -SIGINT $(pidof core)
 fi
