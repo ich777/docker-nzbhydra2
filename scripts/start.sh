@@ -31,6 +31,10 @@ term_handler() {
 	exit 143;
 }
 
+if [ ! -z "${CONNECTED_CONTAINERS}" ]; then
+  su ${USER} -c "/opt/scripts/start-connected-containers.sh" &
+fi
+
 trap 'kill ${!}; term_handler' SIGTERM
 su ${USER} -c "/opt/scripts/start-server.sh" &
 killpid="$!"
