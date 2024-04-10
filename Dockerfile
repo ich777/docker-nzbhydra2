@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/ich777/docker-nzbhydra
 
 RUN apt-get update && \
 	mkdir -p /usr/share/man/man1 && \
-	apt-get -y install --no-install-recommends openjdk-17-jre unzip python3 python3-pip && \
+	apt-get -y install --no-install-recommends openjdk-17-jre unzip python3 python3-pip netcat-traditional && \
 	APPRISE_V=$(wget -qO- https://api.github.com/repos/caronc/apprise/releases/latest | grep "tag_name" | cut -d '"' -f4 | tr -d v) && \
 	pip install apprise==${APPRISE_V} --break-system-packages && \
 	apt-get -y remove python3-pip && \
@@ -15,6 +15,7 @@ RUN apt-get update && \
 ENV DATA_DIR="/nzbhydra2"
 ENV NZBHYDRA2_REL="latest"
 ENV START_PARAMS=""
+ENV CONNECTED_CONTAINERS=""
 ENV UMASK=0000
 ENV DATA_PERM=770
 ENV UID=99
